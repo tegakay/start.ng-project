@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const lesson =require('../controllers/POST/lesson')
+let middleware = require('../jwt/middleware')
 
 
-router.get('/', lesson.findLesson)
-router.post('/',lesson.booklesson)
-router.get('/:lessonid', lesson.findid)
-router.delete('/:lessonid',lesson.deletelesson)
-router.put('/:lessonid', lesson.updatelesson)
+router.get('/',middleware.checkToken, lesson.findLesson)
+router.post('/',middleware.checkToken,lesson.booklesson)
+router.get('/:lessonid',middleware.checkToken, lesson.findid)
+router.delete('/:lessonid',middleware.checkToken,lesson.deletelesson)
+router.put('/:lessonid',middleware.checkToken, lesson.updatelesson)
 
 
 

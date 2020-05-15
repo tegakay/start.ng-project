@@ -38,12 +38,7 @@ const userSchema = new Schema({
         type: String,
            
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }]
+    tokens:{type:String} 
 },
 {
     timestamps:true

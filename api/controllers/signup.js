@@ -1,7 +1,8 @@
 const User = require("../../models/user");
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
-
+let jwt = require("jsonwebtoken");
+let config = require('../jwt/auth')
 exports.signup = (req, res, next) => {
 
   const email = req.body.email;
@@ -32,10 +33,13 @@ exports.signup = (req, res, next) => {
       else {
         let user = new User(req.body);
         return user.save()
-          .then(result => {
-            res.status(201).send({
-              message: "Registration successful"
-            })
+          .then(data => {
+            let token = jwt.sign({ email: req.body.email,role:req.body.role }, config.secret);
+            res.send({
+              data: data,
+              token: token,
+              message:'account creation successful'
+            });
           })
 
           .catch(err => res.send({ message: "an error occured try again later" }))
