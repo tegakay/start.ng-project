@@ -12,7 +12,7 @@ var app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://Tegakay:%40DD137lsr@cluster0-rba8e.mongodb.net/test?retryWrites=true&w=majority",
+    ,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(result => {
